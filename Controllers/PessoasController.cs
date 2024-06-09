@@ -4,7 +4,8 @@ using prova2.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 namespace prova2.Controllers;
 using System.Text.Json;
-
+using Microsoft.AspNetCore.Authorization;
+[Authorize]
 public class PessoasController : BaseController
 {
     private readonly ILogger<Controller> _logger;
@@ -45,14 +46,39 @@ public class PessoasController : BaseController
     [HttpPost]
     public IActionResult Pessoa(Pessoa model, IFormFile anexo)
     {   
-        string caminho = _appEnvironment.WebRootPath + "//imagens//" + anexo.FileName;
-        using(FileStream stream = new FileStream(caminho, FileMode.Create))
+        string caminho = null;
+        if (anexo != null && anexo.Length > 0)
         {
-            anexo.CopyTo(stream);
+            caminho = _appEnvironment.WebRootPath + "//imagens//" + anexo.FileName;
+            using(FileStream stream = new FileStream(caminho, FileMode.Create))
+            {
+                anexo.CopyTo(stream);
+            }
+            caminho = "//imagens//" + anexo.FileName;
         }
-        caminho = "//imagens//" + anexo.FileName;
         model.Imagem = caminho;
         Repositorio<Pessoa> repo = new Repositorio<Pessoa>();
+
+        List<Pessoa> pessoas = repo.Listar();
+        var pessoaCodigoFiscalExistente = pessoas.FirstOrDefault(p => p.CodigoFiscal.Contains(model.CodigoFiscal));
+        var pessoaInscricaoEstadualExistente = pessoas.FirstOrDefault(p => p.InscricaoEstadual.Contains(model.InscricaoEstadual));
+
+        if (pessoaCodigoFiscalExistente != null) {
+            ViewBag.Errors = "Código Fiscal já existe";
+            return View(model);
+        }
+
+        if (pessoaInscricaoEstadualExistente != null) {
+            ViewBag.Errors = "Inscrição Estadual já existe";
+            return View(model);
+        }
+
+        if (model.InscricaoEstadual.Length > 15)
+        {
+            ViewBag.Errors = "Inscrição Estadual deve ter até 15 caracteres";
+            return View(model);
+        }
+
         if (model.Id != null && model.Id != 0) {
             repo.Atualizar(model);
         } else {

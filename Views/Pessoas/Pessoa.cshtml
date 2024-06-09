@@ -5,6 +5,11 @@ ViewData["Title"] = "Pessoa";
 } *@
 <h1 class="display-4">Pessoa</h1>
 <h4>Cadastro</h4>
+<p>
+    <div>
+        @ViewBag.Errors
+    </div>
+</p>
 <div class="row">
     <div class="col-md-4">
         @ViewData["mensagem"]
@@ -22,7 +27,7 @@ ViewData["Title"] = "Pessoa";
             </div>
             <div class="form-group">
                 @Html.LabelFor(model => model.InscricaoEstadual)
-                @Html.TextBoxFor(model => model.InscricaoEstadual, new {@class="form-control"})
+                @Html.TextBoxFor(model => model.InscricaoEstadual, new {@class="form-control", maxlength = "15" })
                 @Html.ValidationMessageFor(model => model.InscricaoEstadual)
             </div>
             <div class="form-group">

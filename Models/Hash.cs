@@ -5,17 +5,13 @@ public class Hash
 {
     private HashAlgorithm hashAlgorithm;
 
-    public Hash(HashAlgorithm algorithm) {
-        this.hashAlgorithm = algorithm;
-    }
-
-    public Hash(SHA256 sHA256)
-    {
+    public Hash(HashAlgorithm algorithm = null) {
+        this.hashAlgorithm = algorithm ?? SHA256.Create();
     }
 
     public string CriptografarSenha(string senha) {
         var encodedValue = Encoding.UTF8.GetBytes(senha);
-        var encryptedSenha = hashAlgorithm.ComputeHash(encodedValue);
+        var encryptedSenha = this.hashAlgorithm.ComputeHash(encodedValue);
 
         var sb = new StringBuilder();
 

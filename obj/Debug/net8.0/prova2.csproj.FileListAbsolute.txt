@@ -30,3 +30,4 @@
 /home/ipeweb/Documents/ueg/prova2/obj/Debug/net8.0/ref/prova2.dll
 /home/ipeweb/Documents/ueg/prova2/bin/Debug/net8.0/Pessoa.json
 /home/ipeweb/Documents/ueg/prova2/bin/Debug/net8.0/Usuario.json
+/home/ipeweb/Documents/ueg/prova2/obj/Debug/net8.0/prova2.sourcelink.json

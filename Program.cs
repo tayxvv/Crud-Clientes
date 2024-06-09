@@ -1,11 +1,10 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Features;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,25 +12,24 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(static opt =>
+{
+    opt.LoginPath = new PathString("/Home/Login");
+    opt.LogoutPath = new PathString("/Home/Logout");
+    opt.AccessDeniedPath = new PathString("/Home/AccessDenied");
+    opt.ExpireTimeSpan = TimeSpan.FromMinutes(120);
+
+    opt.Cookie = new CookieBuilder()
     {
-        opt.LoginPath = new PathString("/Home/Login");
-        opt.LogoutPath = new PathString("/Home/Logout");
-        opt.AccessDeniedPath = new PathString("/Home/AccessDenied");
-        opt.ExpireTimeSpan = TimeSpan.FromMinutes(120);
-
-        opt.Cookie = new CookieBuilder(){
-            HttpOnly = true,
-            SameSite = SameSiteMode.Lax,
-            Name = CookieAuthenticationDefaults.AuthenticationScheme,
-            MaxAge = TimeSpan.FromMinutes(120),
-
-        };
-    }
-);
+        HttpOnly = true,
+        SameSite = SameSiteMode.Lax,
+        Name = CookieAuthenticationDefaults.AuthenticationScheme,
+        MaxAge = TimeSpan.FromMinutes(120),
+    };
+});
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-builder.Services.AddSession(options => 
+builder.Services.AddSession(options =>
 {
     options.Cookie.Name = ".AdventureWorks.Session";
     options.IdleTimeout = TimeSpan.FromSeconds(10);

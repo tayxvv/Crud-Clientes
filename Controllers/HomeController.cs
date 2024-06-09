@@ -55,9 +55,10 @@ public class HomeController : Controller
     {
         Repositorio<Usuario> repo = new Repositorio<Usuario>();
         List<Usuario> usuarios = repo.Listar();
+        var usuario = usuarios.FirstOrDefault(p => p.Login.Contains(model.Login));
         Hash hash = new Hash(SHA256.Create());
 
-        if(usuarios.Any(p => p.Login.Equals(model.Login) && p.Senha.Equals(model.Senha)))
+        if(usuario != null && hash.validarSenha(model.Senha, usuario.Senha))
         {
             HttpContext.Session.SetString("UsuarioLogado", model.Login);
 
@@ -84,7 +85,7 @@ public class HomeController : Controller
             );
 
             return RedirectToAction("Index");
-        } else if(hash.validarSenha(model.Senha, model.Senha)) {
+        } else if(usuario != null && !hash.validarSenha(model.Senha, usuario.Senha)) {
             ViewBag.Errors = "Senha inválida";
             return View(model);
         }
