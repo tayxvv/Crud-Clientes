@@ -3,8 +3,40 @@ using Microsoft.AspNetCore.Mvc;
 using prova2.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 namespace prova2.Controllers;
+
+using System.Reflection.Metadata.Ecma335;
 using System.Text.Json;
 using Microsoft.AspNetCore.Authorization;
+using System;
+using System.IO;
+using System.Text.Json;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+
+public class Estado
+{
+    public string Nome { get; set; }
+    public List<string> Cidades { get; set; }
+}
+
+public class EstadosWrapper
+{
+    public List<Dictionary<string, List<string>>> Estados { get; set; }
+}
+
+public static class StringExtensions
+{
+    public static string NormalizeString(this string input)
+    {
+        return string.IsNullOrWhiteSpace(input) 
+            ? input 
+            : input.Normalize(NormalizationForm.FormD)
+                   .Where(c => CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
+                   .Aggregate("", (current, c) => current + c)
+                   .Normalize(NormalizationForm.FormC);
+    }
+}
 [Authorize]
 public class PessoasController : BaseController
 {
@@ -17,14 +49,102 @@ public class PessoasController : BaseController
         _appEnvironment = appEnvironment;
     }
 
+    public List<string> GetEstados()
+    {
+        string caminhoArquivo = @"/home/ipeweb/Documents/ueg/prova2/Cidades.json";
+        if (System.IO.File.Exists(caminhoArquivo))
+        {
+            string json = System.IO.File.ReadAllText(caminhoArquivo);
+            var estadosWrapper = JsonSerializer.Deserialize<EstadosWrapper>(json);
+
+            List<string> nomesEstados = new List<string>();
+
+            if (estadosWrapper?.Estados != null)
+            {
+                foreach (var estadoDict in estadosWrapper.Estados)
+                {
+                    foreach (var estado in estadoDict)
+                    {
+                        nomesEstados.Add(estado.Key);
+                    }
+                }
+            }
+            else
+            {
+                _logger.LogWarning("estadosWrapper ou estadosWrapper.Estados é nulo");
+            }
+
+            return nomesEstados;
+        }
+        else
+        {
+            _logger.LogWarning($"Arquivo não encontrado: {caminhoArquivo}");
+            return new List<string>();
+        }
+    }
+
+    [HttpGet]
+    public JsonResult GetCidades(string estado)
+    {
+        var cidades = GetCidadesPorEstado(estado);
+        return Json(cidades);
+    }
+
+   
+    public List<string> GetCidadesPorEstado(string nomeEstado)
+    {
+        if (string.IsNullOrEmpty(nomeEstado))
+        {
+            _logger.LogWarning("nomeEstado é nulo ou vazio");
+            return new List<string>();
+        }
+
+        string caminhoArquivo = @"/home/ipeweb/Documents/ueg/prova2/Cidades.json";
+        if (System.IO.File.Exists(caminhoArquivo))
+        {
+            string json = System.IO.File.ReadAllText(caminhoArquivo);
+            var estadosWrapper = JsonSerializer.Deserialize<EstadosWrapper>(json);
+
+            if (estadosWrapper?.Estados != null)
+            {
+                string estadoNormalizado = nomeEstado.NormalizeString();
+                foreach (var estadoDict in estadosWrapper.Estados)
+                {
+                    foreach (var estado in estadoDict.Keys)
+                    {
+                        if (estado.NormalizeString().Equals(estadoNormalizado, StringComparison.OrdinalIgnoreCase))
+                        {
+                            return estadoDict[estado];
+                        }
+                    }
+                }
+            }
+        }
+
+        return new List<string>();
+    }
+
     [HttpGet]
     public IActionResult Pessoa(int id = 0)
     {
         Repositorio<Pessoa> repo = new Repositorio<Pessoa>();
-        Pessoa Pessoa = repo.Buscar(id);
+        Pessoa pessoa = repo.Buscar(id);
 
+        var nomesEstados = GetEstados();
 
-        return View(Pessoa);
+        ViewBag.Estados = new SelectList(nomesEstados, pessoa?.Estado);
+
+        if (pessoa?.Estado != null)
+        {
+            var cidades = GetCidadesPorEstado(pessoa.Estado);
+            ViewBag.Cidades = new SelectList(cidades, pessoa.Cidade);
+        }
+        else
+        {
+            ViewBag.Cidades = new SelectList(new List<string>());
+        }
+
+        return View(pessoa);
     }
 
     public IActionResult Pessoa()
@@ -63,12 +183,22 @@ public class PessoasController : BaseController
         var pessoaCodigoFiscalExistente = pessoas.FirstOrDefault(p => p.CodigoFiscal.Contains(model.CodigoFiscal));
         var pessoaInscricaoEstadualExistente = pessoas.FirstOrDefault(p => p.InscricaoEstadual.Contains(model.InscricaoEstadual));
 
-        if (pessoaCodigoFiscalExistente != null) {
+        if (pessoaCodigoFiscalExistente != null && model.Id == null) {
             ViewBag.Errors = "Código Fiscal já existe";
             return View(model);
         }
 
-        if (pessoaInscricaoEstadualExistente != null) {
+        if (pessoaInscricaoEstadualExistente != null && model.Id == null) {
+            ViewBag.Errors = "Inscrição Estadual já existe";
+            return View(model);
+        }
+
+        if (pessoaCodigoFiscalExistente != null && model.Id != null && model.Id != pessoaCodigoFiscalExistente.Id) {
+            ViewBag.Errors = "Código Fiscal já existe";
+            return View(model);
+        }
+
+        if (pessoaInscricaoEstadualExistente != null && model.Id != null && model.Id != pessoaInscricaoEstadualExistente.Id) {
             ViewBag.Errors = "Inscrição Estadual já existe";
             return View(model);
         }

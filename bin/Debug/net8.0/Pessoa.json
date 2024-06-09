@@ -54,5 +54,33 @@
     "DataNascimento": "2000-10-10T10:10:00",
     "Imagem": "//imagens//Screenshot from 2024-06-06 11-18-20.png",
     "Id": 4
+  },
+  {
+    "Nome": "Jo\u00E3o",
+    "CodigoFiscal": "4324214124234",
+    "InscricaoEstadual": "123456789101235",
+    "NomeFantasia": "nome",
+    "Endereco": "endere\u00E7o",
+    "Numero": "12",
+    "Bairro": "bairro",
+    "Cidade": "Acre\u00FAna",
+    "Estado": "Goi\u00E1s",
+    "DataNascimento": "2010-10-10T10:10:00",
+    "Imagem": null,
+    "Id": 5
+  },
+  {
+    "Nome": "Victor",
+    "CodigoFiscal": "421421421421",
+    "InscricaoEstadual": "124214214214124",
+    "NomeFantasia": "Nome 2",
+    "Endereco": "aaa",
+    "Numero": "12",
+    "Bairro": "aaaa",
+    "Cidade": "\u00C1gua Fria",
+    "Estado": "Bahia",
+    "DataNascimento": "2010-10-10T10:10:00",
+    "Imagem": null,
+    "Id": 6
   }
 ]
