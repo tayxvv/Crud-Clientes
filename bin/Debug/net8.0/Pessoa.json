@@ -1,0 +1,30 @@
+[
+  {
+    "Nome": "Tayssa",
+    "CodigoFiscal": "124214124",
+    "InscricaoEstadual": "1124214124",
+    "NomeFantasia": "Nome fantasia",
+    "Endereco": "aaa",
+    "Numero": "12",
+    "Bairro": "aaa",
+    "Cidade": "Acre\u00FAna",
+    "Estado": "Goi\u00E1s",
+    "DataNascimento": "2004-02-06T02:02:00",
+    "Imagem": "//imagens//Screenshot from 2024-06-07 11-54-54.png",
+    "Id": 1
+  },
+  {
+    "Nome": "Victoria",
+    "CodigoFiscal": "5235235235",
+    "InscricaoEstadual": "235235235235",
+    "NomeFantasia": "Fantasia 2",
+    "Endereco": "aaaa",
+    "Numero": "12",
+    "Bairro": "aaa",
+    "Cidade": "Rio Verde",
+    "Estado": "Goi\u00E1s",
+    "DataNascimento": "2005-10-10T10:10:00",
+    "Imagem": "//imagens//Screenshot from 2024-06-06 09-54-56.png",
+    "Id": 2
+  }
+]
