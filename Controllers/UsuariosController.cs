@@ -28,9 +28,23 @@ public class UsuariosController : Controller
         return View(lista);
     }
 
+    [HttpGet]
+    public IActionResult Usuario(int id = 0)
+    {
+        Repositorio<Usuario> repo = new Repositorio<Usuario>();
+        Usuario usuario = repo.Buscar(id);
+
+        usuario.Senha = "";
+
+        return View(usuario);
+    }
+
     [HttpPost]
     public IActionResult Usuario(Usuario model)
-    {   
+    {
+        if(!ModelState.IsValid) {
+            return View(model);
+        }   
         Repositorio<Usuario> repo = new Repositorio<Usuario>();
         Hash hash = new Hash(SHA256.Create());
         model.Senha = hash.CriptografarSenha(model.Senha);
@@ -56,6 +70,9 @@ public class UsuariosController : Controller
     [HttpPost]
     public IActionResult Editar(Usuario Usuario)
     {
+        if(!ModelState.IsValid) {
+            return View(Usuario);
+        }
         Repositorio<Usuario> repo = new Repositorio<Usuario>();
         Hash hash = new Hash(SHA256.Create());
         Usuario.Senha = hash.CriptografarSenha(Usuario.Senha);

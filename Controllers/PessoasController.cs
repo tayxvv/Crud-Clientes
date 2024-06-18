@@ -142,7 +142,23 @@ public class PessoasController : BaseController
 
     [HttpPost]
     public IActionResult Pessoa(Pessoa model, IFormFile anexo)
-    {   
+    {
+        if(!ModelState.IsValid) {
+            var nomesEstados = GetEstados();
+
+            ViewBag.Estados = new SelectList(nomesEstados, model?.Estado);
+
+            if (model?.Estado != null)
+            {
+                var cidades = GetCidadesPorEstado(model.Estado);
+                ViewBag.Cidades = new SelectList(cidades, model.Cidade);
+            }
+            else
+            {
+                ViewBag.Cidades = new SelectList(new List<string>());
+            }
+            return View(model);
+        }   
         string caminho = null;
         if (anexo != null && anexo.Length > 0)
         {
