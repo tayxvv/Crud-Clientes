@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "RCzEdeLA+kkapp4jsxnHBETHk6lm6UibLuPkaL3t2KQ=",
+  "Hash": "WZo0hPuFMpLImqTy1OHRL6kzXw7sxUdppsr7PWA3h5M=",
   "Source": "prova2",
   "BasePath": "_content/prova2",
   "Mode": "Default",
@@ -17,10 +17,10 @@
   ],
   "Assets": [
     {
-      "Identity": "/home/ipeweb/Documents/ueg/prova2/obj/Debug/net8.0/scopedcss/bundle/prova2.styles.css",
+      "Identity": "/home/ipeweb/Documents/ueg/prova2/obj/Release/net8.0/scopedcss/bundle/prova2.styles.css",
       "SourceId": "prova2",
       "SourceType": "Computed",
-      "ContentRoot": "/home/ipeweb/Documents/ueg/prova2/obj/Debug/net8.0/scopedcss/bundle/",
+      "ContentRoot": "/home/ipeweb/Documents/ueg/prova2/obj/Release/net8.0/scopedcss/bundle/",
       "BasePath": "_content/prova2",
       "RelativePath": "prova2.styles.css",
       "AssetKind": "All",
@@ -33,13 +33,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "/home/ipeweb/Documents/ueg/prova2/obj/Debug/net8.0/scopedcss/bundle/prova2.styles.css"
+      "OriginalItemSpec": "/home/ipeweb/Documents/ueg/prova2/obj/Release/net8.0/scopedcss/bundle/prova2.styles.css"
     },
     {
-      "Identity": "/home/ipeweb/Documents/ueg/prova2/obj/Debug/net8.0/scopedcss/projectbundle/prova2.bundle.scp.css",
+      "Identity": "/home/ipeweb/Documents/ueg/prova2/obj/Release/net8.0/scopedcss/projectbundle/prova2.bundle.scp.css",
       "SourceId": "prova2",
       "SourceType": "Computed",
-      "ContentRoot": "/home/ipeweb/Documents/ueg/prova2/obj/Debug/net8.0/scopedcss/projectbundle/",
+      "ContentRoot": "/home/ipeweb/Documents/ueg/prova2/obj/Release/net8.0/scopedcss/projectbundle/",
       "BasePath": "_content/prova2",
       "RelativePath": "prova2.bundle.scp.css",
       "AssetKind": "All",
@@ -52,7 +52,7 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "/home/ipeweb/Documents/ueg/prova2/obj/Debug/net8.0/scopedcss/projectbundle/prova2.bundle.scp.css"
+      "OriginalItemSpec": "/home/ipeweb/Documents/ueg/prova2/obj/Release/net8.0/scopedcss/projectbundle/prova2.bundle.scp.css"
     },
     {
       "Identity": "/home/ipeweb/Documents/ueg/prova2/wwwroot/css/site.css",
@@ -167,6 +167,44 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/imagens/Screenshot from 2024-06-07 11-54-54.png"
+    },
+    {
+      "Identity": "/home/ipeweb/Documents/ueg/prova2/wwwroot/imagens/Screenshot from 2024-06-13 14-00-44.png",
+      "SourceId": "prova2",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/ipeweb/Documents/ueg/prova2/wwwroot/",
+      "BasePath": "_content/prova2",
+      "RelativePath": "imagens/Screenshot from 2024-06-13 14-00-44.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/imagens/Screenshot from 2024-06-13 14-00-44.png"
+    },
+    {
+      "Identity": "/home/ipeweb/Documents/ueg/prova2/wwwroot/imagens/Screenshot from 2024-06-14 09-16-54.png",
+      "SourceId": "prova2",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/ipeweb/Documents/ueg/prova2/wwwroot/",
+      "BasePath": "_content/prova2",
+      "RelativePath": "imagens/Screenshot from 2024-06-14 09-16-54.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/imagens/Screenshot from 2024-06-14 09-16-54.png"
     },
     {
       "Identity": "/home/ipeweb/Documents/ueg/prova2/wwwroot/js/site.js",

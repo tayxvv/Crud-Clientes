@@ -14,29 +14,6 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 
-public class Estado
-{
-    public string Nome { get; set; }
-    public List<string> Cidades { get; set; }
-}
-
-public class EstadosWrapper
-{
-    public List<Dictionary<string, List<string>>> Estados { get; set; }
-}
-
-public static class StringExtensions
-{
-    public static string NormalizeString(this string input)
-    {
-        return string.IsNullOrWhiteSpace(input) 
-            ? input 
-            : input.Normalize(NormalizationForm.FormD)
-                   .Where(c => CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
-                   .Aggregate("", (current, c) => current + c)
-                   .Normalize(NormalizationForm.FormC);
-    }
-}
 [Authorize]
 public class PessoasController : BaseController
 {
@@ -51,7 +28,7 @@ public class PessoasController : BaseController
 
     public List<string> GetEstados()
     {
-        string caminhoArquivo = @"/home/ipeweb/Documents/ueg/prova2/Cidades.json";
+        string caminhoArquivo = @"Cidades.json";
         if (System.IO.File.Exists(caminhoArquivo))
         {
             string json = System.IO.File.ReadAllText(caminhoArquivo);
@@ -99,7 +76,7 @@ public class PessoasController : BaseController
             return new List<string>();
         }
 
-        string caminhoArquivo = @"/home/ipeweb/Documents/ueg/prova2/Cidades.json";
+        string caminhoArquivo = @"Cidades.json";
         if (System.IO.File.Exists(caminhoArquivo))
         {
             string json = System.IO.File.ReadAllText(caminhoArquivo);
@@ -169,12 +146,12 @@ public class PessoasController : BaseController
         string caminho = null;
         if (anexo != null && anexo.Length > 0)
         {
-            caminho = _appEnvironment.WebRootPath + "//imagens//" + anexo.FileName;
+            caminho = _appEnvironment.WebRootPath + "/imagens/" + anexo.FileName;
             using(FileStream stream = new FileStream(caminho, FileMode.Create))
             {
                 anexo.CopyTo(stream);
             }
-            caminho = "//imagens//" + anexo.FileName;
+            caminho = "/imagens/" + anexo.FileName;
         }
         model.Imagem = caminho;
         Repositorio<Pessoa> repo = new Repositorio<Pessoa>();
@@ -210,6 +187,13 @@ public class PessoasController : BaseController
         }
 
         if (model.Id != null && model.Id != 0) {
+
+            var pessoaDados = pessoas.FirstOrDefault(p => p.Id == model.Id);
+
+            if (model.Imagem == null && pessoaDados.Imagem != null) {
+                model.Imagem = pessoaDados.Imagem;
+            }
+
             repo.Atualizar(model);
         } else {
             try {

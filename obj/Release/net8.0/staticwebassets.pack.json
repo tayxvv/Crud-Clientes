@@ -1,7 +1,7 @@
 {
   "Files": [
     {
-      "Id": "/home/ipeweb/Documents/ueg/prova2/obj/Debug/net8.0/scopedcss/projectbundle/prova2.bundle.scp.css",
+      "Id": "/home/ipeweb/Documents/ueg/prova2/obj/Release/net8.0/scopedcss/projectbundle/prova2.bundle.scp.css",
       "PackagePath": "staticwebassets/prova2.bundle.scp.css"
     },
     {
@@ -27,6 +27,14 @@
     {
       "Id": "/home/ipeweb/Documents/ueg/prova2/wwwroot/imagens/Screenshot from 2024-06-07 11-54-54.png",
       "PackagePath": "staticwebassets/imagens/Screenshot from 2024-06-07 11-54-54.png"
+    },
+    {
+      "Id": "/home/ipeweb/Documents/ueg/prova2/wwwroot/imagens/Screenshot from 2024-06-13 14-00-44.png",
+      "PackagePath": "staticwebassets/imagens/Screenshot from 2024-06-13 14-00-44.png"
+    },
+    {
+      "Id": "/home/ipeweb/Documents/ueg/prova2/wwwroot/imagens/Screenshot from 2024-06-14 09-16-54.png",
+      "PackagePath": "staticwebassets/imagens/Screenshot from 2024-06-14 09-16-54.png"
     },
     {
       "Id": "/home/ipeweb/Documents/ueg/prova2/wwwroot/js/site.js",
@@ -261,19 +269,19 @@
       "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.map"
     },
     {
-      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.prova2.props",
+      "Id": "obj/Release/net8.0/staticwebassets/msbuild.build.prova2.props",
       "PackagePath": "build\\prova2.props"
     },
     {
-      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.prova2.props",
+      "Id": "obj/Release/net8.0/staticwebassets/msbuild.buildMultiTargeting.prova2.props",
       "PackagePath": "buildMultiTargeting\\prova2.props"
     },
     {
-      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.prova2.props",
+      "Id": "obj/Release/net8.0/staticwebassets/msbuild.buildTransitive.prova2.props",
       "PackagePath": "buildTransitive\\prova2.props"
     },
     {
-      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.prova2.Microsoft.AspNetCore.StaticWebAssets.props",
+      "Id": "obj/Release/net8.0/staticwebassets/msbuild.prova2.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     }
   ],

@@ -72,9 +72,13 @@ ViewData["Title"] = "Pessoa";
                 @Html.Label("Imagem")
                 <input type="file" id="anexo" name="anexo">
             </div>
+            @if (Model != null && Model.Imagem != null) 
+            {
+                <img src="@Model.Imagem" alt="Image" />
+            }
             @if (Model != null && Model.Id != null)
             {
-            <a asp-action="Exportar" asp-route-id="@Model.Id">Exportar</a>
+            <a style="margin-top: 20px;" class="btn btn-success" asp-action="Exportar" asp-route-id="@Model.Id">Exportar</a>
             }
             <input type="submit" value="Salvar" class="btn btn-success" style="margin-top: 20px;" />
         </form>
